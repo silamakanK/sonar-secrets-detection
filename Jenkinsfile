@@ -11,8 +11,8 @@ pipeline {
         stage('Checkout') {
             steps {
                 echo 'Cloning repository...'
-                git branch: 'master',
-                    url: 'https://github.com/gorohoroh/sonar-secrets-detection.git'
+                git branch: 'main',
+                    url: 'https://github.com/silamakanK/sonar-secrets-detection.git'
             }
         }
 
