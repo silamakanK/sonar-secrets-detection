@@ -1,10 +1,6 @@
 pipeline {
     agent any
 
-    tools {
-    	// le nom doit correspondre à celui ajouté dans Manage Jenkins > Tools
-    	sonarScanner 'SonarScanner'
-    }
     environment {
         SONAR_HOST_URL   = 'http://sonarqube:9000'
         SONAR_PROJECT_KEY = 'secret-detection-demo'
@@ -23,15 +19,14 @@ pipeline {
         stage('SonarQube Analysis') {
             steps {
                 script {
-		    def scannerHome = tool 'SonarScanner'
                     withSonarQubeEnv('SonarQube') {
                         withCredentials([string(credentialsId: 'SONAR_TOKEN', variable: 'SONAR_TOKEN')]) {
                             sh """
-                                ${scannerHome}/bin/sonar-scanner \
-                                -Dsonar.projectKey=${SONAR_PROJECT_KEY} \
+                                sonar-scanner \
+                                -Dsonar.projectKey=$SONAR_PROJECT_KEY \
                                 -Dsonar.sources=. \
-                                -Dsonar.host.url=${SONAR_HOST_URL} \
-                                -Dsonar.token=${SONAR_TOKEN} \
+                                -Dsonar.host.url=$SONAR_HOST_URL \
+                                -Dsonar.token=$SONAR_TOKEN \
                                 -Dsonar.text.inclusions=**/*.env,**/*.json
                             """
                         }
