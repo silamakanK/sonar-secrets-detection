@@ -3,7 +3,7 @@ import {Octokit} from "@octokit/core";
 
 export const getGitHubData = async () => {
 
-    const octokit = new Octokit({auth: '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'});
+    const octokit = new Octokit({auth: process.env.SONAR_TOKEN});
 
     const topicSearchResults = await octokit.request('GET /search/topics', {
         q: "is:curated created:>2022-01-01",
