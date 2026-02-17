@@ -3,7 +3,7 @@ pipeline {
 
     tools {
     	// le nom doit correspondre à celui ajouté dans Manage Jenkins > Tools
-    	sonarQubeScanner 'SonarScanner'
+    	sonarScanner 'SonarScanner'
     }
     environment {
         SONAR_HOST_URL   = 'http://sonarqube:9000'
